@@ -1,4 +1,8 @@
-# assignment_angular_todo
+# React Todos
 Do it!
 
-[An AngularJS JavaScript app from the Viking Code School involving CRUD actions, custom directives, custom services, custom filters and all the usual goodness](http://www.vikingcodeschool.com)
+[A React JavaScript Todo app from the Viking Code School ](http://www.vikingcodeschool.com)
+
+by Sia Karamalegos
+
+This assignment was written for AngularJS, but I just to use React + Redux instead.
