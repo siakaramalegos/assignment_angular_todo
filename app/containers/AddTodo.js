@@ -34,12 +34,14 @@ class AddTodo extends React.Component {
   render () {
     return (
       <form id="add-todo">
+        <label>Description</label>
         <input
           type='text'
           value={this.state.text}
           onChange={this.handleTextChange}
           placeholder='Make groceries' />
         <br />
+        <label>Due Date</label>
         <input
           type='date'
           value={this.state.date}

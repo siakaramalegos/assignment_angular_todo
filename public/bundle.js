@@ -22775,12 +22775,22 @@
 	      return _react2.default.createElement(
 	        'form',
 	        { id: 'add-todo' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Description'
+	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',
 	          value: this.state.text,
 	          onChange: this.handleTextChange,
 	          placeholder: 'Make groceries' }),
 	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Due Date'
+	        ),
 	        _react2.default.createElement('input', {
 	          type: 'date',
 	          value: this.state.date,
