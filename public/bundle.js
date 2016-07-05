@@ -22684,10 +22684,11 @@
 
 	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _TodoListContainer = __webpack_require__(196);
 
-	// import FilterFrame from './FilterFrame'
-	// import TodoList from './TodoList'
+	var _TodoListContainer2 = _interopRequireDefault(_TodoListContainer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var App = function App() {
 	  return _react2.default.createElement(
@@ -22698,9 +22699,13 @@
 	      null,
 	      'Yet Another Todo App'
 	    ),
-	    _react2.default.createElement(_AddTodo2.default, null)
+	    _react2.default.createElement(_AddTodo2.default, null),
+	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(_TodoListContainer2.default, null)
 	  );
 	};
+	// import FilterFrame from './FilterFrame'
+
 
 	exports.default = App;
 
@@ -22813,6 +22818,144 @@
 	};
 
 	exports.default = (0, _reactRedux.connect)()(AddTodo);
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reactRedux = __webpack_require__(183);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _actions = __webpack_require__(193);
+
+	var _TodoList = __webpack_require__(197);
+
+	var _TodoList2 = _interopRequireDefault(_TodoList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    todos: state.todos
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onTodoClick: function onTodoClick(id) {
+	      dispatch((0, _actions.toggleTodo)(id));
+	    }
+	  };
+	};
+
+	var TodoListContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_TodoList2.default);
+
+	exports.default = TodoListContainer;
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TodoList = function TodoList(_ref) {
+	  var todos = _ref.todos;
+	  var onTodoClick = _ref.onTodoClick;
+
+	  var todoRows = todos.map(function (todo) {
+	    return _react2.default.createElement(
+	      "tr",
+	      { key: todo.id, onClick: function onClick() {
+	          return onTodoClick(todo.id);
+	        } },
+	      _react2.default.createElement(
+	        "td",
+	        null,
+	        todo.completed ? "yes" : "no"
+	      ),
+	      _react2.default.createElement(
+	        "td",
+	        null,
+	        todo.text
+	      ),
+	      _react2.default.createElement(
+	        "td",
+	        null,
+	        todo.date
+	      ),
+	      _react2.default.createElement("td", null)
+	    );
+	  });
+
+	  return _react2.default.createElement(
+	    "table",
+	    null,
+	    _react2.default.createElement(
+	      "thead",
+	      null,
+	      _react2.default.createElement(
+	        "tr",
+	        null,
+	        _react2.default.createElement(
+	          "th",
+	          null,
+	          "Completed?"
+	        ),
+	        _react2.default.createElement(
+	          "th",
+	          null,
+	          "Description"
+	        ),
+	        _react2.default.createElement(
+	          "th",
+	          null,
+	          "Due"
+	        ),
+	        _react2.default.createElement(
+	          "th",
+	          null,
+	          "Delete"
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "tbody",
+	      null,
+	      todoRows
+	    )
+	  );
+	};
+
+	TodoList.propTypes = {
+	  todos: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+	    id: _react.PropTypes.number.isRequired,
+	    completed: _react.PropTypes.bool.isRequired,
+	    text: _react.PropTypes.string.isRequired //,
+	    // date: PropTypes.date.isRequired
+	  }).isRequired).isRequired,
+	  onTodoClick: _react.PropTypes.func.isRequired
+	};
+
+	exports.default = TodoList;
 
 /***/ }
 /******/ ]);
