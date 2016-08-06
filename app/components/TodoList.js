@@ -4,7 +4,7 @@ const TodoList = ({todos, onTodoClick}) => {
   const todoRows = todos.map( (todo) => {
     return (
       <tr key={todo.id} onClick={() => onTodoClick(todo.id)}>
-        <td>{todo.completed ? "yes" : "no"}</td>
+        <td>{todo.completed ? <i className="fa fa-check-square-o" aria-hidden="true"></i> : <i className="fa fa-square-o" aria-hidden="true"></i>}</td>
         <td>{todo.text}</td>
         <td>{todo.date}</td>
         <td></td>

@@ -22890,7 +22890,7 @@
 	      _react2.default.createElement(
 	        "td",
 	        null,
-	        todo.completed ? "yes" : "no"
+	        todo.completed ? _react2.default.createElement("i", { className: "fa fa-check-square-o", "aria-hidden": "true" }) : _react2.default.createElement("i", { className: "fa fa-square-o", "aria-hidden": "true" })
 	      ),
 	      _react2.default.createElement(
 	        "td",
