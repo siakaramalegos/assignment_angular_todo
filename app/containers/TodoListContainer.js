@@ -3,9 +3,20 @@ import React from 'react'
 import { toggleTodo, deleteTodo } from '../actions'
 import TodoList from '../components/TodoList'
 
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos
+    case 'SHOW_ACTIVE':
+      return todos.filter(todo => !todo.completed)
+    case 'SHOW_COMPLETED':
+      return todos.filter(todo => todo.completed)
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
   }
 }
 

@@ -22684,7 +22684,11 @@
 
 	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 
-	var _TodoListContainer = __webpack_require__(196);
+	var _FilterFrameContainer = __webpack_require__(196);
+
+	var _FilterFrameContainer2 = _interopRequireDefault(_FilterFrameContainer);
+
+	var _TodoListContainer = __webpack_require__(198);
 
 	var _TodoListContainer2 = _interopRequireDefault(_TodoListContainer);
 
@@ -22701,11 +22705,11 @@
 	    ),
 	    _react2.default.createElement(_AddTodo2.default, null),
 	    _react2.default.createElement('br', null),
+	    _react2.default.createElement(_FilterFrameContainer2.default, null),
+	    _react2.default.createElement('br', null),
 	    _react2.default.createElement(_TodoListContainer2.default, null)
 	  );
 	};
-	// import FilterFrame from './FilterFrame'
-
 
 	exports.default = App;
 
@@ -22837,15 +22841,137 @@
 
 	var _actions = __webpack_require__(193);
 
-	var _TodoList = __webpack_require__(197);
+	var _FilterFrame = __webpack_require__(197);
 
-	var _TodoList2 = _interopRequireDefault(_TodoList);
+	var _FilterFrame2 = _interopRequireDefault(_FilterFrame);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    todos: state.todos
+	    visibilityFilter: state.visibilityFilter
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onFilterButtonClick: function onFilterButtonClick(filter) {
+	      dispatch((0, _actions.setVisibilityFilter)(filter));
+	    }
+	  };
+	};
+
+	var FilterFrameContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_FilterFrame2.default);
+
+	exports.default = FilterFrameContainer;
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FilterFrame = function FilterFrame(_ref) {
+	  var visibilityFilter = _ref.visibilityFilter;
+	  var onFilterButtonClick = _ref.onFilterButtonClick;
+
+	  var filterButton = void 0;
+
+	  if (visibilityFilter === 'SHOW_ALL') {
+	    filterButton = _react2.default.createElement(
+	      'button',
+	      { onClick: function onClick() {
+	          onFilterButtonClick('SHOW_ACTIVE');
+	        } },
+	      'Hide Completed'
+	    );
+	  } else {
+	    filterButton = _react2.default.createElement(
+	      'button',
+	      { onClick: function onClick() {
+	          onFilterButtonClick('SHOW_ALL');
+	        } },
+	      'Show All'
+	    );
+	  }
+
+	  return _react2.default.createElement(
+	    'div',
+	    { id: 'filter-frame' },
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'Filter Todos'
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      filterButton,
+	      _react2.default.createElement(
+	        'button',
+	        null,
+	        _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
+	        ' ',
+	        'Clear Completed'
+	      )
+	    )
+	  );
+	};
+
+	exports.default = FilterFrame;
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reactRedux = __webpack_require__(183);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _actions = __webpack_require__(193);
+
+	var _TodoList = __webpack_require__(199);
+
+	var _TodoList2 = _interopRequireDefault(_TodoList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var getVisibleTodos = function getVisibleTodos(todos, filter) {
+	  switch (filter) {
+	    case 'SHOW_ALL':
+	      return todos;
+	    case 'SHOW_ACTIVE':
+	      return todos.filter(function (todo) {
+	        return !todo.completed;
+	      });
+	    case 'SHOW_COMPLETED':
+	      return todos.filter(function (todo) {
+	        return todo.completed;
+	      });
+	  }
+	};
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    todos: getVisibleTodos(state.todos, state.visibilityFilter)
 	  };
 	};
 
@@ -22866,7 +22992,7 @@
 	exports.default = TodoListContainer;
 
 /***/ },
-/* 197 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
