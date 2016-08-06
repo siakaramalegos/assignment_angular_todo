@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React from 'react'
-import { toggleTodo } from '../actions'
+import { toggleTodo, deleteTodo } from '../actions'
 import TodoList from '../components/TodoList'
 
 const mapStateToProps = (state) => {
@@ -11,8 +11,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTodoClick: (id) => {
+    onCheckboxClick: (id) => {
       dispatch(toggleTodo(id))
+    },
+
+    onDeleteLinkClick: (id) => {
+      dispatch(deleteTodo(id))
     }
   }
 }

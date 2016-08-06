@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react'
 
-const TodoList = ({todos, onTodoClick}) => {
+const TodoList = ({todos, onCheckboxClick, onDeleteLinkClick}) => {
   const todoRows = todos.map( (todo) => {
     return (
-      <tr key={todo.id} onClick={() => onTodoClick(todo.id)}>
-        <td>{todo.completed ? <i className="fa fa-check-square-o" aria-hidden="true"></i> : <i className="fa fa-square-o" aria-hidden="true"></i>}</td>
+      <tr key={todo.id}>
+        <td onClick={() => onCheckboxClick(todo.id)}>
+          {todo.completed ? <i className="fa fa-check-square-o" aria-hidden="true"></i> : <i className="fa fa-square-o" aria-hidden="true"></i>}
+        </td>
         <td>{todo.text}</td>
         <td>{todo.date}</td>
-        <td></td>
+        <td onClick={() => onDeleteLinkClick(todo.id)}>
+          <i className="fa fa-trash-o" aria-hidden="true"></i>
+        </td>
       </tr>
     )
   })
@@ -19,7 +23,7 @@ const TodoList = ({todos, onTodoClick}) => {
           <th>Completed?</th>
           <th>Description</th>
           <th>Due</th>
-          <th>Delete</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -36,7 +40,8 @@ TodoList.propTypes = {
     text: PropTypes.string.isRequired//,
     // date: PropTypes.date.isRequired
   }).isRequired).isRequired,
-  onTodoClick: PropTypes.func.isRequired
+  onCheckboxClick: PropTypes.func.isRequired,
+  onDeleteLinkClick: PropTypes.func.isRequired
 }
 
 export default TodoList

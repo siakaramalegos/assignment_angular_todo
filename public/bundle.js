@@ -22851,8 +22851,12 @@
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    onTodoClick: function onTodoClick(id) {
+	    onCheckboxClick: function onCheckboxClick(id) {
 	      dispatch((0, _actions.toggleTodo)(id));
+	    },
+
+	    onDeleteLinkClick: function onDeleteLinkClick(id) {
+	      dispatch((0, _actions.deleteTodo)(id));
 	    }
 	  };
 	};
@@ -22879,17 +22883,18 @@
 
 	var TodoList = function TodoList(_ref) {
 	  var todos = _ref.todos;
-	  var onTodoClick = _ref.onTodoClick;
+	  var onCheckboxClick = _ref.onCheckboxClick;
+	  var onDeleteLinkClick = _ref.onDeleteLinkClick;
 
 	  var todoRows = todos.map(function (todo) {
 	    return _react2.default.createElement(
 	      "tr",
-	      { key: todo.id, onClick: function onClick() {
-	          return onTodoClick(todo.id);
-	        } },
+	      { key: todo.id },
 	      _react2.default.createElement(
 	        "td",
-	        null,
+	        { onClick: function onClick() {
+	            return onCheckboxClick(todo.id);
+	          } },
 	        todo.completed ? _react2.default.createElement("i", { className: "fa fa-check-square-o", "aria-hidden": "true" }) : _react2.default.createElement("i", { className: "fa fa-square-o", "aria-hidden": "true" })
 	      ),
 	      _react2.default.createElement(
@@ -22902,7 +22907,13 @@
 	        null,
 	        todo.date
 	      ),
-	      _react2.default.createElement("td", null)
+	      _react2.default.createElement(
+	        "td",
+	        { onClick: function onClick() {
+	            return onDeleteLinkClick(todo.id);
+	          } },
+	        _react2.default.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true" })
+	      )
 	    );
 	  });
 
@@ -22933,7 +22944,7 @@
 	        _react2.default.createElement(
 	          "th",
 	          null,
-	          "Delete"
+	          "Actions"
 	        )
 	      )
 	    ),
@@ -22952,7 +22963,8 @@
 	    text: _react.PropTypes.string.isRequired //,
 	    // date: PropTypes.date.isRequired
 	  }).isRequired).isRequired,
-	  onTodoClick: _react.PropTypes.func.isRequired
+	  onCheckboxClick: _react.PropTypes.func.isRequired,
+	  onDeleteLinkClick: _react.PropTypes.func.isRequired
 	};
 
 	exports.default = TodoList;
