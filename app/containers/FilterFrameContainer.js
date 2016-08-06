@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React from 'react'
-import { setVisibilityFilter } from '../actions'
+import { setVisibilityFilter, deleteCompleted } from '../actions'
 import FilterFrame from '../components/FilterFrame'
 
 const mapStateToProps = (state) => {
@@ -13,6 +13,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFilterButtonClick: (filter) => {
       dispatch(setVisibilityFilter(filter))
+    },
+
+    onDeleteButtonClick: () => {
+      dispatch(deleteCompleted())
     }
   }
 }

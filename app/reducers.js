@@ -3,6 +3,7 @@ import {
   DELETE_TODO,
   TOGGLE_TODO,
   SET_VISIBILITY_FILTER,
+  DELETE_COMPLETED,
   VisibilityFilters
 } from './actions'
 import { combineReducers } from 'redux'
@@ -22,6 +23,10 @@ const todos = (state = [], action) => {
     case DELETE_TODO:
       return state.filter( (todo) => {
         return todo.id !== action.id
+      })
+    case DELETE_COMPLETED:
+      return state.filter( (todo) =>{
+        return !todo.completed
       })
     case TOGGLE_TODO:
       return state.map( (todo) => {

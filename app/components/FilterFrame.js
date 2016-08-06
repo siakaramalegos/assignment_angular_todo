@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FilterFrame = ({visibilityFilter, onFilterButtonClick}) => {
+const FilterFrame = ({visibilityFilter, onFilterButtonClick, onDeleteButtonClick}) => {
   let filterButton
 
   if (visibilityFilter === 'SHOW_ALL') {
@@ -15,7 +15,7 @@ const FilterFrame = ({visibilityFilter, onFilterButtonClick}) => {
       <p>
         { filterButton }
 
-        <button>
+        <button onClick={ () => onDeleteButtonClick() }>
           <i className="fa fa-trash-o" aria-hidden="true"></i>
           {' '}Clear Completed
         </button>

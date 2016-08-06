@@ -3,6 +3,7 @@ export const ADD_TODO = 'ADD_TODO'
 export const DELETE_TODO = 'DELETE_TODO'
 export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const DELETE_COMPLETED = 'DELETE_COMPLETED'
 
 // Other constants
 export const VisibilityFilters = {
@@ -26,6 +27,12 @@ export function deleteTodo (id) {
   return {
     type: DELETE_TODO,
     id
+  }
+}
+
+export function deleteCompleted () {
+  return {
+    type: DELETE_COMPLETED
   }
 }
 

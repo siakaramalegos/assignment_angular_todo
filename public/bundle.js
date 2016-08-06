@@ -22575,6 +22575,10 @@
 	      return state.filter(function (todo) {
 	        return todo.id !== action.id;
 	      });
+	    case _actions.DELETE_COMPLETED:
+	      return state.filter(function (todo) {
+	        return !todo.completed;
+	      });
 	    case _actions.TOGGLE_TODO:
 	      return state.map(function (todo) {
 	        if (todo.id === action.id) {
@@ -22619,6 +22623,7 @@
 	});
 	exports.addTodo = addTodo;
 	exports.deleteTodo = deleteTodo;
+	exports.deleteCompleted = deleteCompleted;
 	exports.toggleTodo = toggleTodo;
 	exports.setVisibilityFilter = setVisibilityFilter;
 	// Action types
@@ -22626,6 +22631,7 @@
 	var DELETE_TODO = exports.DELETE_TODO = 'DELETE_TODO';
 	var TOGGLE_TODO = exports.TOGGLE_TODO = 'TOGGLE_TODO';
 	var SET_VISIBILITY_FILTER = exports.SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+	var DELETE_COMPLETED = exports.DELETE_COMPLETED = 'DELETE_COMPLETED';
 
 	// Other constants
 	var VisibilityFilters = exports.VisibilityFilters = {
@@ -22649,6 +22655,12 @@
 	  return {
 	    type: DELETE_TODO,
 	    id: id
+	  };
+	}
+
+	function deleteCompleted() {
+	  return {
+	    type: DELETE_COMPLETED
 	  };
 	}
 
@@ -22857,6 +22869,10 @@
 	  return {
 	    onFilterButtonClick: function onFilterButtonClick(filter) {
 	      dispatch((0, _actions.setVisibilityFilter)(filter));
+	    },
+
+	    onDeleteButtonClick: function onDeleteButtonClick() {
+	      dispatch((0, _actions.deleteCompleted)());
 	    }
 	  };
 	};
@@ -22884,6 +22900,7 @@
 	var FilterFrame = function FilterFrame(_ref) {
 	  var visibilityFilter = _ref.visibilityFilter;
 	  var onFilterButtonClick = _ref.onFilterButtonClick;
+	  var onDeleteButtonClick = _ref.onDeleteButtonClick;
 
 	  var filterButton = void 0;
 
@@ -22919,7 +22936,9 @@
 	      filterButton,
 	      _react2.default.createElement(
 	        'button',
-	        null,
+	        { onClick: function onClick() {
+	            return onDeleteButtonClick();
+	          } },
 	        _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
 	        ' ',
 	        'Clear Completed'
